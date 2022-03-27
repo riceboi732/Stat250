@@ -1,0 +1,50 @@
+---
+title: "hw04.rmd"
+author: "Victor Huang"
+date: "2/1/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Q1. (Exercise 6.15b)
+
+
+
+## Q2. (Exercise 6.17)
+
+
+
+## Q3. (Exercise 6.20)
+
+
+
+## Q4. (Exercise 6.22)
+
+
+
+## Q5. (Exercise 6.28)
+
+
+
+## Q6. (Exercise 6.30)
+
+
+
+## Q7. (Exercise 6.36)
+
+
+
+## Q8 (Exercise 6.34)
+
+
+
+## Q9 (Exercise 6.37)
+
+
+
+## Q10 (Exercise 6.43)
+
+

@@ -1,0 +1,248 @@
+---
+geometry: margin = .9in
+output: pdf_document
+---
+
+# EDA in R -- Stat 250, Winter 2022
+
+```{r setup1, message=FALSE, include=FALSE}
+# Don't change this part
+knitr::opts_chunk$set(collapse=TRUE, comment=NULL)
+```
+
+## Loading R packages
+
+```{r setup, message=FALSE}
+# Load packages here:
+library(mosaic)
+library(tidyverse)
+```
+
+### Loading data from the web
+
+```{r}
+# Load the data here
+bechdel <- read.csv("https://aloy.rbind.io/data/bechdel.csv")
+```
+
+#### Checkpoint:
+
+How many cases are there in this data set?  
+
+How many variables?  For each variable, identify its data type (e.g., categorical, quantitative).
+
+```{r}
+# Take a look at the data set
+```
+
+
+
+## Graphical exploration
+
+### Create a bar chart of the Bechdel test results
+
+
+```{r}
+# Code for a bar chart here
+```
+
+Now, add a title and axis labels
+```{r}
+# Polish your bar chart here
+```
+
+
+####  Checkpoint:
+Create a bar chart of the `binary` Bechdel test results.
+
+```{r}
+# Create a bar chart for binary
+```
+
+
+### Reorder a bar chart
+
+```{r}
+# Reorder the bars
+```
+
+
+### Create a histogram of domestic return on investment
+
+```{r}
+# Create a histogram here
+```
+
+### Change the number of bins in a histogram
+
+```{r}
+# Use 100 bins in the histogram
+```
+
+### Change the binwidth in a histogram
+
+```{r}
+# Use a binwidth of 10
+```
+
+#### Checkpoint: Add informative labels
+
+```{r}
+# Add a title and change the x-axis label
+```
+
+### Create a boxplot of domestic return on investment
+
+```{r}
+# Create a boxplot
+```
+
+```{r}
+# Remove the y-axis entirely
+```
+
+### Transform a variable
+
+
+```{r}
+# Create log-transformed histograms and boxplots
+```
+
+### Side-by-side boxplots
+
+```{r}
+# Create side-by-side boxplots
+```
+
+
+### Scatterplots
+
+```{r}
+# Create a scatterplot here
+```
+
+
+
+## Numerical exploration
+
+
+### Summary statistics for quantitative variables
+
+Calculate summary stats for the budget in 2013 USD. What happens if you apply `summary` to the entire data frame?
+```{r}
+# Put your code here
+```
+
+Calculate the mean, median, IQR, standard deviation for `budget_2013`
+```{r}
+# Put your code here
+```
+
+Calculate the mean for `roi_dom`
+```{r}
+# Put your code here
+```
+
+Calculate the same summary statistics for `budget_2013`, but using the mosaic package syntax:
+
+```{r}
+# Put your code here
+```
+
+Now, use `favstats()`:
+```{r}
+# Put your code here
+```
+
+### Grouped summaries
+
+Calculate a summary of `budget_2013` for each level of `clean_test` using the `favstats()` command:
+
+```{r}
+# Put your code here
+```
+
+Which category has the highest median budget? Which genre has the smallest first quartile (Q1) for budget?
+
+
+
+### Summary statistics for categorical variables
+
+Calculate the number of movies that passed of failed the Bechdel test using `tally()`:
+
+```{r}
+# Put your code here
+```
+
+Now look at the relative frequency distribution (proportions):
+
+```{r}
+# Put your code here
+```
+
+
+### Contingency tables
+
+Break down the `binary` Bechdel test results by decade:
+
+```{r}
+# Put your code here
+```
+
+
+Breaking down `binary` by `decade_code`, calculating the proportion of movies that pass the Bechdel test by decade:
+
+```{r}
+# Put your code here
+```
+
+Add margins:
+
+```{r}
+# Put your code here
+```
+
+
+
+## Your turn
+
+#### Calculate the number of movies released in each year.
+
+
+```{r yt1}
+# insert your code here
+```
+
+(Add your description and/or answer in plain text here.)
+
+
+#### Describe the distribution of `budget_2013` in terms of its center, shape, and  spread, including any plots you use.
+
+```{r yt2}
+# insert your code here
+```
+
+(Add your description and/or answer in plain text here.)
+
+
+
+#### Using numerical summaries and a side-by-side boxplot, determine if movie budgets have changed over the decades.
+
+```{r yt3}
+# insert your code here
+```
+
+(Add your description and/or answer in plain text here.)
+
+
+
+#### Do movies that pass the Bechdel test tend to have higher or lower budgets than movies that fail the Bechdeul test? 
+
+```{r yt4}
+# insert your code here
+```
+
+(Add your description and/or answer in plain text here.)
+
+
+

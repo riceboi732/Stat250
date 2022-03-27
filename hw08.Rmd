@@ -1,0 +1,140 @@
+---
+title: "hw08"
+author: "Victor Huang"
+date: "3/4/2022"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(tidyverse)
+library(plotrix)
+library(mosaic)
+library(boot)
+library(pwr)
+```
+
+
+Q1. Exercise 8.2
+
+We are able to get the folloing hypothesis: the null states that the mean choleserol level for vegeterians is equal to 161 while the alternative states that it isn't equal to 161. Given the information from the questionm we get the following t-score and p-value. Since our p-value is less than 0.05, we can reject the null hypothesis and conclude that there exists a statistically discernable difference between vegeterian average cholesterol levels. 
+```{r}
+t <- (164 - 161)/(5/sqrt(24))
+p <- 2* pt(q = t, df = 23, lower.tail=FALSE)
+```
+
+
+Q2. Exercise 8.5. Part (b) asks you to conduct a bootstrap t test. This is very similar to the
+bootstrap t interval, but instead of finding quantile, you compare your observed T statistic to the
+bootstrap distribution and see what proportion of the bootstrap statistics exceed that value. See
+Section 8.2 for an overview and code to adapt.
+
+a).
+```{r}
+Walleye <- read.csv("https://sites.google.com/site/chiharahesterberg/data2/Walleye.csv")
+hist(Walleye$Weight)
+qqnorm(Walleye$Weight)
+```
+
+b).
+```{r, error = TRUE}
+Weight <- Walleye$Weight
+observedT <- t.test(Walleye$Weight, mu = 2.5, alt = "less")$statistic
+xbar <- length(Weight)
+N <- 10^4
+Tstar <- numeric(N)
+for(i in 1:N){
+  bootx <- sample(Weight, n, replace = TRUE)
+  Tstar[i] <- (mean(bootx) - xbar)/(sd(bootx)/sqrt(n))
+}
+hist(Tstar)
+p2 <- (sum(Tstar <= observedT) + 1)/(N+1)
+p2
+```
+Given that our p-value is significantly less than 5% , we  reject the null hypothesis and conclude that there is a difference in average weight for current walleye compared to the average weight of walleye from the 1990.
+
+c).
+```{r}
+t.test(Walleye$Weight, mu = 2.5, alt = "less")
+```
+Since our p-value for the t.test is less than 5%, we are able to reject the null hypothesis and conclude that there is indeed a difference/decrease in average wieght of the walleye of now compared to the average weight of walleye in 1990
+
+Q3. Exercise 8.8
+
+a).
+```{r}
+Spruce <- read.csv("https://sites.google.com/site/chiharahesterberg/data2/Spruce.csv")
+t.test(Di.change ~ Competition, data = Spruce)
+```
+Since we get a p-value that is less than 5%, we can reject the null hypothesis and conclude that there is indeed a difference in diameter change when compaing the two groups of trees (competing and non-competing)
+
+b).
+This means that the data is randomly sampled, as such, we can confidantly accept the conclusion we arrived at in part a). as all confounding variables have been negated.
+
+Q4. Exercise 8.15
+
+```{r}
+prop.test(x = 69, n = 310, p = 0.26, correct = FALSE, alternative = "less")
+```
+We get a p-value greater than 5%, as such we fail to reject the null hypothesis and do not have sufficient evidence to support the professor's hypothesis.
+
+Q5. Exercise 8.22
+
+Type I Error: The drug does indeed lower chlosterol levels but is found and concluded that it does not (false positive).
+
+Type II Error: The drug does not lower chlosterol levels but is found and concluded that it does (false negative).
+
+Q6. Exercise 8.24
+
+```{r}
+zval <- 1.645
+sm <- 25 + zval*(4/sqrt(30))
+z <- (sm - 27)/(4/sqrt(30))
+power <- 1 - pnorm(z)
+power
+```
+
+We get the power of the test to be 0.8629376
+
+Q7. Exercise 8.28
+Given $y = \sum^{12}_{i = 1}x_{i} ~ Bin(12, p)$, we can get using PMF $f_y(y) = P(Y = y) = (^{12}_{y})p^{y}(1-p)^{12-y}; y=0,1,...,12$. As such, we can get type ! error probablity to be:
+$$P(y \in {0,1} | p = 0.3) = P(y = 0 | p = 0.3) + P(y = 1 | p = 0.3)$$
+$$(1 - 0.3)^12 + 12(0.3)(1-0.3)^{11}$$
+$$(0.7)^{12} + 12(0.3)(0.7)^{11}$$
+$$0.085$$
+
+As such, we see that we have proabblity 0.085 of getting a type I error.
+
+b).
+
+$$1 - \beta = P(reject)$$
+$$p(y \in {0,1} | p) = p(y = 0|p) + P(y = 1|p)$$
+$$(1-p)^{12} + 12p + (1-p)^n$$
+$$(1-p)^{11} + (1 + 11p)$$
+
+As such, we get that $1 - \beta = (1-p)^{11} + (1 + 11p)$
+
+c).
+(reference picture)
+
+Q8. Exercise 8.30
+(reference picture)
+
+Q9. Exercise 8.25
+
+```{r}
+N <-  ((-2.3263 - 1.2816)^2 * (0.3)^2)/(1.2 - 1)^2
+N
+```
+We get N = 29.29, due to ethics issues we will round it up to 30. As such, is she wanted to have a 90% chance of detecting a mean of 1.2 or higher, she would need a sample larger than 30.
+
+Q10. Exercise 8.38
+```{r}
+alphastar <- 1 - (1 - 0.1)^{1/12}
+alphastar
+```
+The significance level for each test should be 0.0087 accoridng to the Sidak correction.
